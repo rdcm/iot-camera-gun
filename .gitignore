@@ -1,0 +1,15 @@
+# ide
+.idea
+
+# go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# arduino
+secrets.h
