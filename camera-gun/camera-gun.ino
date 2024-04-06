@@ -35,7 +35,7 @@ void setup() {
 
   // init camera
   while (!camera.begin().isOk())
-      Serial.println(camera.exception.toString());
+    Serial.println(camera.exception.toString());
 
   // connect to WiFi
   while (!wifi.connect().isOk())
@@ -49,27 +49,26 @@ void setup() {
   Serial.println("Telegram OK");
 }
 
-void loop() {  
+void loop() {
   // capture picture
   if (!camera.capture().isOk()) {
-      Serial.println("Capture error:");
-      Serial.println(camera.exception.toString());
-      return;
+    Serial.println("Capture error:");
+    Serial.println(camera.exception.toString());
+    return;
   }
 
   // run motion detection
   if (!detection.run().isOk()) {
     Serial.println("Motion detection error:");
-      Serial.println(detection.exception.toString());
-      return;
+    Serial.println(detection.exception.toString());
+    return;
   }
 
   // on motion, perform action
   if (detection.triggered()) {
     if (telegram.to(TELEGRAM_CHAT).send(camera.frame).isOk()) {
       Serial.println("Photo sent to Telegram");
-    }
-    else {
+    } else {
       Serial.println("Sending error:");
       Serial.println(telegram.exception.toString());
     }
